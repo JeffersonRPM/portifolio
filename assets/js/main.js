@@ -2,47 +2,39 @@ window.onload = function () {
     window.scrollTo(0, 0);
 };
 
-if (window.innerWidth < 992) {
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section2");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 5000);
+var timeouts = [];
+var isScrolling = false;
 
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section3");
+function scrollToSection(id, timeout) {
+    timeouts.push(setTimeout(function () {
+        isScrolling = true;
+        var targetAnchor = document.getElementById(id);
         targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 7500);
-
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section4");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 10000);
-
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section5");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 12500);
-
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section1");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 15000);
-} else {
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section2");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 5000);
-
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section4");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 10000);
-
-    setTimeout(function () {
-        var targetAnchor = document.getElementById("section1");
-        targetAnchor.scrollIntoView({ behavior: 'smooth' });
-    }, 15000);
+        setTimeout(function () {
+            isScrolling = false;
+        }, 1000);
+    }, timeout));
 }
+
+if (window.innerWidth < 992) {
+    scrollToSection("section2", 5000);
+    scrollToSection("section3", 7500);
+    scrollToSection("section4", 10000);
+    scrollToSection("section5", 12500);
+    scrollToSection("section1", 15000);
+} else {
+    scrollToSection("section2", 5000);
+    scrollToSection("section4", 10000);
+    scrollToSection("section1", 15000);
+}
+
+window.addEventListener('scroll', function() {
+    if (!isScrolling) {
+        for (var i = 0; i < timeouts.length; i++) {
+            clearTimeout(timeouts[i]);
+        }
+    }
+});
 
 function updateDivClass() {
     const div = document.getElementById('img-home');
