@@ -28,7 +28,7 @@ if (window.innerWidth < 992) {
     scrollToSection("section1", 15000);
 }
 
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     if (!isScrolling) {
         for (var i = 0; i < timeouts.length; i++) {
             clearTimeout(timeouts[i]);
@@ -38,7 +38,8 @@ window.addEventListener('scroll', function() {
 
 function updateDivClass() {
     const div = document.getElementById('img-home');
-    const h1 = document.getElementById('h1-intro');
+    const h1Intro1 = document.querySelector('.h1-intro-1');
+    const h1Intro2 = document.querySelector('.h1-intro-2');
     const h2 = document.getElementById('h2-intro');
     const git = document.getElementById('git-logo');
 
@@ -46,8 +47,11 @@ function updateDivClass() {
         div.classList.remove('justify-content-center');
         div.classList.add('justify-content-end');
 
-        h1.classList.remove('text-center');
-        h1.classList.add('margin-h1');
+        h1Intro1.classList.remove('text-center');
+        h1Intro1.classList.add('margin-h1');
+
+        h1Intro2.classList.remove('text-center');
+        h1Intro2.classList.add('margin-h1');
 
         h2.classList.remove('text-center');
         h2.classList.add('margin-h2');
@@ -58,8 +62,11 @@ function updateDivClass() {
         div.classList.remove('justify-content-end');
         div.classList.add('justify-content-center');
 
-        h1.classList.remove('margin-h1');
-        h1.classList.add('text-center');
+        h1Intro1.classList.remove('margin-h1');
+        h1Intro1.classList.add('text-center');
+
+        h1Intro2.classList.remove('margin-h1');
+        h1Intro2.classList.add('text-center');
 
         h2.classList.remove('margin-h2');
         h2.classList.add('text-center');
